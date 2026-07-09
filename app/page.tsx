@@ -166,21 +166,18 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-teal-500 selection:text-black">
-      {/* Decorative gradient blur background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-72 bg-gradient-to-r from-violet-600/10 via-teal-500/10 to-blue-600/10 blur-[120px] pointer-events-none" />
-
+    <div className="flex flex-col min-h-screen bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-zinc-900 bg-zinc-950/70 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/95 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
-          <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+          <span className="w-2 h-2 rounded-full bg-zinc-900" />
+          <h1 className="text-lg font-bold tracking-tight text-zinc-900">
             금마 전자허가원
           </h1>
         </div>
         <button
           onClick={() => router.push("/status")}
-          className="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100 border border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer"
+          className="text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-zinc-900 border border-zinc-200 transition-all cursor-pointer"
         >
           신청 내역 조회
         </button>
@@ -189,27 +186,27 @@ export default function Home() {
       {/* Main Container */}
       <main className="flex-1 max-w-md w-full mx-auto px-5 py-8 z-10">
         {/* Banner */}
-        <div className="mb-8 text-center sm:text-left">
-          <h2 className="text-2xl font-bold text-zinc-100 tracking-tight">허가원 신청</h2>
+        <div className="mb-6 text-center sm:text-left">
+          <h2 className="text-xl font-bold text-zinc-900 tracking-tight">허가원 신청</h2>
         </div>
 
         {/* Status Messages */}
         {errorMessage && (
-          <div className="mb-6 p-4 rounded-xl border border-rose-500/20 bg-rose-950/20 text-rose-300 text-sm leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="mb-6 p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-800 text-xs leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300 font-medium">
             {errorMessage}
           </div>
         )}
 
         {successMessage && (
-          <div className="mb-6 p-4 rounded-xl border border-teal-500/20 bg-teal-950/20 text-teal-300 text-sm leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="mb-6 p-4 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs leading-relaxed animate-in fade-in slide-in-from-top-4 duration-300 font-medium">
             {successMessage}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Periods Selection */}
-          <div className="space-y-2.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+          <div className="space-y-2">
+            <label className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               1. 교시 선택
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -220,9 +217,9 @@ export default function Home() {
                     type="button"
                     key={period}
                     onClick={() => togglePeriod(period)}
-                    className={`h-13 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${isSelected
-                      ? "border-teal-500 bg-teal-500/5 text-teal-400 shadow-[0_0_20px_rgba(20,184,166,0.08)]"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
+                    className={`h-11 rounded-xl border font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${isSelected
+                      ? "border-zinc-900 bg-zinc-900 text-white"
+                      : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
                       }`}
                   >
                     {period}
@@ -231,7 +228,7 @@ export default function Home() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className="w-4 h-4 text-teal-400"
+                        className="w-3.5 h-3.5 text-white"
                       >
                         <path
                           fillRule="evenodd"
@@ -247,19 +244,19 @@ export default function Home() {
           </div>
 
           {/* Location Selection */}
-          <div className="space-y-2.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+          <div className="space-y-2">
+            <label className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               2. 장소 선택
             </label>
             {loadingLocations ? (
-              <div className="h-12 w-full rounded-xl bg-zinc-900/40 border border-zinc-800 animate-pulse flex items-center px-4">
-                <span className="text-xs text-zinc-500">위치 정보 불러오는 중...</span>
+              <div className="h-11 w-full rounded-xl bg-zinc-100 border border-zinc-200 animate-pulse flex items-center px-4">
+                <span className="text-xs text-zinc-400">위치 정보 불러오는 중...</span>
               </div>
             ) : (
               <select
                 value={selectedLocation}
                 onChange={(e) => setSelectedLocation(e.target.value)}
-                className="w-full h-12 px-4 rounded-xl border border-zinc-800 bg-zinc-900/40 text-zinc-200 focus:outline-none focus:border-teal-500/80 transition-colors text-sm appearance-none cursor-pointer"
+                className="w-full h-11 px-4 rounded-xl border border-zinc-200 bg-white text-zinc-800 focus:outline-none focus:border-zinc-900 transition-colors text-xs appearance-none cursor-pointer"
                 style={{
                   backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2371717a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E")`,
                   backgroundPosition: "right 1rem center",
@@ -271,7 +268,7 @@ export default function Home() {
                   <option value="" disabled>위치가 등록되지 않았습니다.</option>
                 ) : (
                   locations.map((loc) => (
-                    <option key={loc.id} value={loc.name} className="bg-zinc-950">
+                    <option key={loc.id} value={loc.name} className="bg-white">
                       {loc.name}
                     </option>
                   ))
@@ -281,34 +278,34 @@ export default function Home() {
           </div>
 
           {/* Reason Input */}
-          <div className="space-y-2.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+          <div className="space-y-2">
+            <label className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               3. 사유 입력
             </label>
             <textarea
               placeholder="예: 수행평가, 실험 등"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full min-h-[80px] p-4 rounded-xl border border-zinc-800 bg-zinc-900/40 text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-teal-500/80 transition-colors text-sm resize-none leading-relaxed"
+              className="w-full min-h-[80px] p-4 rounded-xl border border-zinc-200 bg-white text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors text-xs resize-none leading-relaxed"
             />
           </div>
 
           {/* Applicants Management */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <label className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
                 4. 신청자 목록
               </label>
               <button
                 type="button"
                 onClick={addApplicantRow}
-                className="text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 transition-colors cursor-pointer"
+                className="text-xs font-bold text-zinc-800 hover:text-black flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="w-4 h-4"
+                  className="w-3.5 h-3.5"
                 >
                   <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                 </svg>
@@ -316,11 +313,11 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {applicants.map((applicant, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2.5 animate-in fade-in slide-in-from-left-2 duration-200"
+                  className="flex items-center gap-2 animate-in fade-in slide-in-from-left-2 duration-200"
                 >
                   <input
                     type="text"
@@ -329,29 +326,29 @@ export default function Home() {
                     placeholder="학번 (예: 1101)"
                     value={applicant.id}
                     onChange={(e) => handleApplicantChange(index, "id", e.target.value)}
-                    className="w-1/3 h-11 px-3 rounded-xl border border-zinc-800 bg-zinc-900/40 text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-teal-500/80 transition-colors text-sm text-center font-mono"
+                    className="w-1/3 h-11 px-3 rounded-xl border border-zinc-200 bg-white text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors text-xs text-center font-mono"
                   />
                   <input
                     type="text"
                     placeholder="이름 (예: 홍길동)"
                     value={applicant.name}
                     onChange={(e) => handleApplicantChange(index, "name", e.target.value)}
-                    className="flex-1 h-11 px-3 rounded-xl border border-zinc-800 bg-zinc-900/40 text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-teal-500/80 transition-colors text-sm"
+                    className="flex-1 h-11 px-3 rounded-xl border border-zinc-200 bg-white text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors text-xs"
                   />
                   <button
                     type="button"
                     onClick={() => removeApplicantRow(index)}
                     disabled={applicants.length === 1}
-                    className={`w-11 h-11 flex items-center justify-center rounded-xl border border-zinc-800 transition-colors cursor-pointer ${applicants.length === 1
-                      ? "opacity-30 cursor-not-allowed bg-zinc-900/20 text-zinc-600"
-                      : "bg-zinc-900/40 text-zinc-400 hover:border-rose-500/30 hover:text-rose-400"
+                    className={`w-11 h-11 flex items-center justify-center rounded-xl border border-zinc-200 transition-colors cursor-pointer ${applicants.length === 1
+                      ? "opacity-30 cursor-not-allowed bg-zinc-50 text-zinc-300"
+                      : "bg-zinc-50 text-zinc-500 hover:border-rose-200 hover:text-rose-600 hover:bg-rose-50/20"
                       }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-4 h-4"
+                      className="w-3.5 h-3.5"
                     >
                       <path
                         fillRule="evenodd"
@@ -369,10 +366,10 @@ export default function Home() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full h-13 mt-4 rounded-xl font-semibold text-sm bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-zinc-950 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(20,184,166,0.15)] hover:shadow-[0_4px_25px_rgba(20,184,166,0.25)] transition-all cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
+            className="w-full h-12 mt-4 rounded-xl font-semibold text-xs bg-zinc-900 hover:bg-black text-white flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
           >
             {submitting ? (
-              <span className="w-5 h-5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               "허가원 신청하기"
             )}
