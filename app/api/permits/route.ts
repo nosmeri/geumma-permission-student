@@ -63,26 +63,30 @@ export async function POST(request: Request) {
       },
     });
 
-    const existingStudentIds = new Set<string>();
-    for (const permit of existingPermits) {
-      const apps = permit.applicants as any[];
-      if (Array.isArray(apps)) {
-        for (const app of apps) {
-          if (app && typeof app.id === "string") {
-            existingStudentIds.add(app.id);
+    const duplicates: string[] = [];
+    for (const applicant of applicants) {
+      const studentId = applicant.id;
+      for (const permit of existingPermits) {
+        const apps = permit.applicants as any[];
+        if (Array.isArray(apps)) {
+          const isStudentInPermit = apps.some((app) => app && app.id === studentId);
+          if (isStudentInPermit) {
+            // Check if there is any overlapping period (e.g. "야자 1교시")
+            const hasPeriodOverlap = permit.periods.some((p) => periods.includes(p));
+            if (hasPeriodOverlap) {
+              if (!duplicates.includes(studentId)) {
+                duplicates.push(studentId);
+              }
+            }
           }
         }
       }
     }
 
-    const duplicates = applicants
-      .filter((app: any) => existingStudentIds.has(app.id))
-      .map((app: any) => app.id);
-
     if (duplicates.length > 0) {
       return NextResponse.json(
         {
-          error: "이미 해당 날짜에 허가원을 신청한 학생이 포함되어 있습니다.",
+          error: "이미 해당 교시에 허가원을 신청한 학생이 포함되어 있습니다.",
           duplicates,
         },
         { status: 400 }

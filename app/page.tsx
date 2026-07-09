@@ -132,7 +132,7 @@ export default function Home() {
       if (!response.ok) {
         if (result.duplicates) {
           setErrorMessage(
-            `신청 실패: 학번 [${result.duplicates.join(", ")}] 학생은 이미 해당 날짜에 허가원을 신청했습니다.`
+            `신청 실패: 학번 [${result.duplicates.join(", ")}] 학생은 이미 해당 교시에 허가원을 신청했습니다.`
           );
         } else {
           setErrorMessage(result.error || "허가원 신청에 실패했습니다.");
