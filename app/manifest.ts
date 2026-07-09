@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: '금마 전자허가원 (학생용)',
-    short_name: '금마허가원',
-    description: '금마 전자허가원 학생 신청 시스템',
+    name: '전북과학고 전자허가원 (학생용)',
+    short_name: '전북과고허가원',
+    description: '전북과학고등학교 전자허가원 학생 신청 시스템',
     start_url: '/',
     display: 'standalone',
     background_color: '#000000',

@@ -172,7 +172,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-zinc-900" />
           <h1 className="text-lg font-bold tracking-tight text-zinc-900">
-            금마 전자허가원
+            전북과학고 전자허가원
           </h1>
         </div>
         <button
