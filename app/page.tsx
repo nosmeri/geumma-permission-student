@@ -15,14 +15,14 @@ interface Applicant {
 
 export default function Home() {
   const router = useRouter();
-  
+
   // Form states
   const [selectedPeriods, setSelectedPeriods] = useState<string[]>([]);
   const [locations, setLocations] = useState<Location[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [reason, setReason] = useState<string>("");
   const [applicants, setApplicants] = useState<Applicant[]>([{ id: "", name: "" }]);
-  
+
   // UI states
   const [loadingLocations, setLoadingLocations] = useState<boolean>(true);
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -85,15 +85,15 @@ export default function Home() {
 
     // Frontend validations
     if (selectedPeriods.length === 0) {
-      setErrorMessage("교시(야자 1교시, 야자 2교시)를 선택해 주세요.");
+      setErrorMessage("교시를 선택해 주세요.");
       return;
     }
     if (!selectedLocation) {
-      setErrorMessage("이동할 위치를 선택해 주세요.");
+      setErrorMessage("장소를 선택해 주세요.");
       return;
     }
     if (!reason.trim()) {
-      setErrorMessage("이동 사유를 입력해 주세요.");
+      setErrorMessage("사유를 입력해 주세요.");
       return;
     }
 
@@ -142,7 +142,7 @@ export default function Home() {
 
       // Success
       setSuccessMessage("허가원 신청이 성공적으로 완료되었습니다!");
-      
+
       // Save ID to localStorage for status tracking
       const recentPermits = JSON.parse(localStorage.getItem("recent_permits") || "[]");
       recentPermits.push(result.id);
@@ -152,7 +152,7 @@ export default function Home() {
       setSelectedPeriods([]);
       setReason("");
       setApplicants([{ id: "", name: "" }]);
-      
+
       // Navigate to status page after 1.5 seconds
       setTimeout(() => {
         router.push("/status");
@@ -191,9 +191,6 @@ export default function Home() {
         {/* Banner */}
         <div className="mb-8 text-center sm:text-left">
           <h2 className="text-2xl font-bold text-zinc-100 tracking-tight">허가원 신청</h2>
-          <p className="text-sm text-zinc-400 mt-1.5">
-            이동할 교시와 위치를 입력하여 교사 승인을 신청합니다.
-          </p>
         </div>
 
         {/* Status Messages */}
@@ -213,7 +210,7 @@ export default function Home() {
           {/* Periods Selection */}
           <div className="space-y-2.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              1. 이동 교시 선택
+              1. 교시 선택
             </label>
             <div className="grid grid-cols-2 gap-3">
               {["야자 1교시", "야자 2교시"].map((period) => {
@@ -223,11 +220,10 @@ export default function Home() {
                     type="button"
                     key={period}
                     onClick={() => togglePeriod(period)}
-                    className={`h-13 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                      isSelected
-                        ? "border-teal-500 bg-teal-500/5 text-teal-400 shadow-[0_0_20px_rgba(20,184,166,0.08)]"
-                        : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
-                    }`}
+                    className={`h-13 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${isSelected
+                      ? "border-teal-500 bg-teal-500/5 text-teal-400 shadow-[0_0_20px_rgba(20,184,166,0.08)]"
+                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
+                      }`}
                   >
                     {period}
                     {isSelected && (
@@ -253,7 +249,7 @@ export default function Home() {
           {/* Location Selection */}
           <div className="space-y-2.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              2. 이동 위치 선택
+              2. 장소 선택
             </label>
             {loadingLocations ? (
               <div className="h-12 w-full rounded-xl bg-zinc-900/40 border border-zinc-800 animate-pulse flex items-center px-4">
@@ -287,10 +283,10 @@ export default function Home() {
           {/* Reason Input */}
           <div className="space-y-2.5">
             <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              3. 이동 사유 입력
+              3. 사유 입력
             </label>
             <textarea
-              placeholder="예: 과제 제출용 컴퓨터 사용, 조별 자율스터디 등"
+              placeholder="예: 수행평가, 실험 등"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               className="w-full min-h-[80px] p-4 rounded-xl border border-zinc-800 bg-zinc-900/40 text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-teal-500/80 transition-colors text-sm resize-none leading-relaxed"
@@ -301,7 +297,7 @@ export default function Home() {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-                4. 동반 신청자 (학번 + 이름)
+                4. 신청자 목록
               </label>
               <button
                 type="button"
@@ -346,11 +342,10 @@ export default function Home() {
                     type="button"
                     onClick={() => removeApplicantRow(index)}
                     disabled={applicants.length === 1}
-                    className={`w-11 h-11 flex items-center justify-center rounded-xl border border-zinc-800 transition-colors cursor-pointer ${
-                      applicants.length === 1
-                        ? "opacity-30 cursor-not-allowed bg-zinc-900/20 text-zinc-600"
-                        : "bg-zinc-900/40 text-zinc-400 hover:border-rose-500/30 hover:text-rose-400"
-                    }`}
+                    className={`w-11 h-11 flex items-center justify-center rounded-xl border border-zinc-800 transition-colors cursor-pointer ${applicants.length === 1
+                      ? "opacity-30 cursor-not-allowed bg-zinc-900/20 text-zinc-600"
+                      : "bg-zinc-900/40 text-zinc-400 hover:border-rose-500/30 hover:text-rose-400"
+                      }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
