@@ -114,7 +114,11 @@ export default function Home() {
     setSubmitting(true);
 
     try {
-      const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+      // Format current date as YYYY-MM-DD in KST (UTC+9)
+      const now = new Date();
+      const kstOffset = 9 * 60 * 60 * 1000;
+      const kstDate = new Date(now.getTime() + kstOffset);
+      const today = kstDate.toISOString().split("T")[0]; // YYYY-MM-DD
       const response = await fetch("/api/permits", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
